@@ -10,6 +10,7 @@ Brief:File is cpp file
 #include <iostream>
 #include <limits>
 
+
 executive::executive(std::string fileName)
 {
   std::ifstream infile;
@@ -18,6 +19,7 @@ executive::executive(std::string fileName)
   std::string name;
   std::string password;
   int length;
+  std::cout.setstate(std::ios_base::failbit);
   if(infile.is_open())  //  file read successful
   {
     while(std::getline(infile, data)) // make sure file input is valid
@@ -44,6 +46,7 @@ executive::executive(std::string fileName)
       password = "";
     }
     infile.close();
+    std::cout.clear();
     std::cout << "\e[1mFile reading done, ready for next step:\e[0m\n";
     std::cout << "..................................\n\n";
   }
