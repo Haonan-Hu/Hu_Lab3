@@ -28,17 +28,14 @@ executive::executive(std::string fileName)
       {
         name = name + data.at(i);
       }
-//      std::cout << "name: " << name << '\n';
       for(int i = index + 1; i < length; i++)
       {
         password = password + data.at(i);
       }
-//      std::cout << "password: " << password << '\n';
       m_hash.addUser(name, password);
       name = "";
       password = "";
     }
-    std::cout << "\n\n\n\n\n\n";
     infile.close();
   }
   else
@@ -49,6 +46,8 @@ executive::~executive(){}
 
 void executive::run()
 {
-  m_hash.addUser("dotnet", "onl223");
+  //m_hash.addUser("dotnet", "onl223");
+  m_hash.printUser();
+  m_hash.rehash();
   m_hash.printUser();
 }

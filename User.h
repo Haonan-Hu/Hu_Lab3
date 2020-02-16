@@ -52,5 +52,6 @@ public:
 	* @return the next item
 	*/
 	std::string getName()const;
+	bool isEmpty();
 };
 #endif

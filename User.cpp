@@ -31,3 +31,15 @@ std::string User::getName()const
 {
 	return m_userName;
 }
+
+bool User::isEmpty()
+{
+	if(m_userName.length() == 0 || m_password.length() == 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+}
