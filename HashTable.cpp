@@ -93,7 +93,7 @@ int HashTable::linerProbing(std::string password, User* user)
 
 int HashTable::quadraticProbing(std::string password, User* user)
 {
-  int index = 0;
+  int index = -1;
   int x = asciiToInt(password);
   int k = m_size_Q;
   for(int i = 0; i < k; i++)
@@ -199,15 +199,107 @@ void HashTable::rehash()
   }
 }
 
+bool HashTable::checkDup(std::string userName)
+{
+  bool exist = false;
+  for(int i = 0; i < m_size_L; i++)
+  {
+    if(m_arrLinear[i].getName() == userName || m_arrQuadratic[i].getName() == userName)
+    {
+      exist = true;
+    }
+  }
+  return exist;
+}
 
 void HashTable::addUser(std::string userName, std::string password)
 {
   int indexLinear = linerProbing(password, m_arrLinear);
   int indexQuadratic = quadraticProbing(password, m_arrQuadratic);
-  m_arrLinear[indexLinear].setName(userName);
-  m_arrLinear[indexLinear].setPassword(password);
-  m_arrQuadratic[indexQuadratic].setName(userName);
-  m_arrQuadratic[indexQuadratic].setPassword(password);
+  if(!checkDup(userName))
+  {
+    if(getLambdaLinear() == 1) // table is full, linear probing cannot insert
+    {
+      std::cout << '[' << userName << ']' << " insertion at location "
+                << '[' << indexLinear << ']' << " not successful using Linear probing\n\n";
+    }
+    else
+    {
+      m_arrLinear[indexLinear].setName(userName);
+      m_arrLinear[indexLinear].setPassword(password);
+      std::cout << '[' << userName << ']' << " insertion at location "
+                << '[' << indexLinear << ']' << " success using Linear probing\n\n";
+    }
+
+
+    if(indexQuadratic == -1) // fail flag for quadratic
+    {
+      std::cout << '[' << userName << ']' << " insertion at location "
+                << '[' << indexLinear << ']' << " not successful using Quadratic probing\n\n";
+    }
+    else
+    {
+      m_arrQuadratic[indexQuadratic].setName(userName);
+      m_arrQuadratic[indexQuadratic].setPassword(password);
+      std::cout << '[' << userName << ']' << " insertion at location "
+                << '[' << indexLinear << ']' << " success using Quadratic probing\n\n";
+    }
+  }
+  else
+  {
+    std::cout << "Found duplicates, " << '[' << userName << ']' << "add user failed\n\n";
+  }
+}
+
+void HashTable::removeUser(std::string userName, std::string password)
+{
+  int passwordInt = asciiToInt(password);
+  int indexLinear = 0;
+  int indexQuadratic = 0;
+  bool deleted_L = false;
+  bool deleted_Q = false;
+  User deletion;
+  for(int i = 0; i < m_size_L; i++)
+  {
+    indexLinear = (passwordInt + i) % m_size_L;
+    if(!m_arrLinear[indexLinear].isDeleted() && m_arrLinear[indexLinear].getName() == userName)
+    {
+      m_arrLinear[indexLinear] = deletion;
+      m_arrLinear[indexLinear].setDeletion(true);
+      deleted_L = true;
+      break;
+    }
+  }
+  std::cout << "Liner probing: \n";
+  if(deleted_L)
+  {
+    std::cout << '[' << userName << ']' << " has been removed\n";
+  }
+  else
+  {
+    std::cout << "Record does not exist\n";
+  }
+
+  for(int i = 0; i < m_size_Q; i++)
+  {
+    indexQuadratic = (passwordInt + i) % m_size_Q;
+    if(!m_arrQuadratic[indexQuadratic].isDeleted() && m_arrQuadratic[indexQuadratic].getName() == userName)
+    {
+      m_arrQuadratic[indexQuadratic] = deletion;
+      m_arrQuadratic[indexQuadratic].setDeletion(true);
+      deleted_Q = true;
+      break;
+    }
+  }
+  std::cout << "Quadratic probing: \n";
+  if(deleted_Q)
+  {
+    std::cout << '[' << userName << ']' << " has been removed\n";
+  }
+  else
+  {
+    std::cout << "Record does not exist\n";
+  }
 }
 
 void HashTable::printUser()

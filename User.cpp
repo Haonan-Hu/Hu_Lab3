@@ -10,6 +10,7 @@ User::User(std::string userName, std::string password)
 {
 	m_userName = userName;
 	m_password = password;
+	m_deleted = false;
 }
 
 void User::setPassword(std::string password)
@@ -42,4 +43,20 @@ bool User::isEmpty()
 	{
 		return false;
 	}
+}
+
+void User::setDeletion(bool deleted)
+{
+	m_deleted = deleted;
+}
+
+bool User::isDeleted()
+{
+	return m_deleted;
+}
+
+void User::operator=(User user)
+{
+	m_userName = user.getName();
+	m_password = user.getPassword();
 }

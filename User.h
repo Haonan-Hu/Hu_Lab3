@@ -14,6 +14,7 @@ class User
 private:
 	std::string m_userName;
 	std::string m_password;
+	bool m_deleted;
 
 public:
 	/**
@@ -53,5 +54,8 @@ public:
 	*/
 	std::string getName()const;
 	bool isEmpty();
+	bool isDeleted();
+	void setDeletion(bool deleted);
+	void operator=(User user);
 };
 #endif

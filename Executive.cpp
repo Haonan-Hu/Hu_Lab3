@@ -46,8 +46,9 @@ executive::~executive(){}
 
 void executive::run()
 {
-  //m_hash.addUser("dotnet", "onl223");
+  m_hash.addUser("dotnet", "onl223");
   m_hash.printUser();
-  m_hash.rehash();
+  //m_hash.rehash();
+  m_hash.removeUser("nodejs", "cls334");
   m_hash.printUser();
 }

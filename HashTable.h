@@ -23,6 +23,7 @@ public:
   double getLambdaQuadratic();
   void rehash();
   int asciiToInt(std::string password);
+  bool checkDup(std::string userName);
 
 private:
   User* m_arrLinear; // linear probing method hash table
