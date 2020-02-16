@@ -16,14 +16,29 @@ executive::executive(std::string fileName)
   infile.open(fileName);
   std::string data;
   std::string name;
-  std::string temp;
-  int score;
-
+  std::string password;
+  int length;
   if(infile.is_open())  //  file read successful
   {
     while(std::getline(infile, data)) // make sure file input is valid
     {
+      length = data.length();
+      int index = data.find(',');
+      for(int i = 0; i < index; i++)
+      {
+        name = name + data.at(i);
+      }
+//      std::cout << "name: " << name << '\n';
+      for(int i = index + 1; i < length; i++)
+      {
+        password = password + data.at(i);
+      }
+//      std::cout << "password: " << password << '\n';
+      m_hash.addUser(name, password);
+      name = "";
+      password = "";
     }
+    std::cout << "\n\n\n\n\n\n";
     infile.close();
   }
   else
@@ -34,74 +49,6 @@ executive::~executive(){}
 
 void executive::run()
 {
-  int choice;
-  for(;;)
-  {
-    std::cout << "make a selection: \n";
-    std::cout << "1) AddPlayer\n";
-    std::cout << "2) RemovePlayer\n";
-    std::cout << "3) PrintPlayerList\n";
-    std::cout << "4) PlayerWithGoalCountEqualTo(g)\n";
-    std::cout << "5) PlayerWithNumGoalsGreaterThan(h)\n";
-    std::cout << "6) PlayerWithNumGoalsLessThan(h)\n";
-    std::cout << "7) Exit\n";
-    std::cin >> choice;
-    std::cout << '\n';
-    while(1)
-    {
-      if(std::cin.fail())
-      {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "Wrong input!\n\n";
-        std::cout << "..................................\n\n";
-        std::cout << "Choose one operation from the options below: \n\n";
-        std::cout << "1) AddPlayer\n";
-        std::cout << "2) RemovePlayer\n";
-        std::cout << "3) PrintPlayerList\n";
-        std::cout << "4) PlayerWithGoalCountEqualTo(g)\n";
-        std::cout << "5) PlayerWithNumGoalsGreaterThan(h)\n";
-        std::cout << "6) PlayerWithNumGoalsLessThan(h)\n";
-        std::cout << "7) Exit\n";
-        std::cin >> choice;
-        std::cout << '\n';
-      }
-      if(!std::cin.fail())
-        break;
-    }
-    if(choice == 1)
-    {
-
-    }
-    else if(choice == 2)
-    {
-
-    }
-    else if(choice == 3)
-    {
-
-    }
-    else if(choice == 4)
-    {
-
-    }
-    else if(choice == 5)
-    {
-
-    }
-    else if(choice == 6)
-    {
-      
-    }
-    else if(choice == 7)
-    {
-      std::cout << "Program execution complete!\n";
-      break;
-    }
-    else
-    {
-      std::cout << " Wrong input!\n\n";
-      std::cout << "..................................\n\n";
-    }
-  }
+  m_hash.addUser("dotnet", "onl223");
+  m_hash.printUser();
 }
