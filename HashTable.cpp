@@ -302,6 +302,80 @@ void HashTable::removeUser(std::string userName, std::string password)
   }
 }
 
+void HashTable::forgotPassword()
+{
+  std::string input = "";
+  bool exist_L = false;
+  bool exist_Q = false;
+  std::cout << "Enter user name: \n";
+  std::cin >> input;
+  std::cout << "\n";
+  std::cout << "Linear Probing: \n\n";
+  for(int i = 0; i < m_size_L;i++)
+  {
+    if(m_arrLinear[i].getName() == input)
+    {
+      std::cout << m_arrLinear[i].getName() << ':' << m_arrLinear[i].getPassword() << "\n\n";
+      exist_L = true;
+    }
+  }
+  if(!exist_L)
+  {
+    std::cout << "Record not found\n\n";
+  }
+
+  std::cout << "Quadratic Probing: \n\n";
+  for(int i = 0; i < m_size_Q;i++)
+  {
+    if(m_arrQuadratic[i].getName() == input)
+    {
+      std::cout << m_arrQuadratic[i].getName() << ':' << m_arrQuadratic[i].getPassword() << "\n\n";;
+      exist_Q = true;
+    }
+  }
+  if(!exist_Q)
+  {
+    std::cout << "Record not found\n\n";
+  }
+}
+
+void HashTable::forgotUserName()
+{
+  std::string input = "";
+  bool exist_L = false;
+  bool exist_Q = false;
+  std::cout << "Enter password: \n";
+  std::cin >> input;
+  std::cout << "\n";
+  std::cout << "Linear Probing: \n\n";
+  for(int i = 0; i < m_size_L;i++)
+  {
+    if(m_arrLinear[i].getPassword() == input)
+    {
+      std::cout << m_arrLinear[i].getName() << ':' << m_arrLinear[i].getPassword() << "\n\n";
+      exist_L = true;
+    }
+  }
+  if(!exist_L)
+  {
+    std::cout << "Record not found\n\n";
+  }
+
+  std::cout << "Quadratic Probing: \n\n";
+  for(int i = 0; i < m_size_Q;i++)
+  {
+    if(m_arrQuadratic[i].getPassword() == input)
+    {
+      std::cout << m_arrQuadratic[i].getName() << ':' << m_arrQuadratic[i].getPassword() << "\n\n";;
+      exist_Q = true;
+    }
+  }
+  if(!exist_Q)
+  {
+    std::cout << "Record not found\n\n";
+  }
+}
+
 void HashTable::printUser()
 {
   std::cout << "\e[4mLinear Probing:\e[0m\n";

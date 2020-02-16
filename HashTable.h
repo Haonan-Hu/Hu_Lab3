@@ -24,6 +24,8 @@ public:
   void rehash();
   int asciiToInt(std::string password);
   bool checkDup(std::string userName);
+  void forgotPassword();
+  void forgotUserName();
 
 private:
   User* m_arrLinear; // linear probing method hash table
