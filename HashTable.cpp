@@ -262,12 +262,14 @@ void HashTable::removeUser(std::string userName, std::string password)
   for(int i = 0; i < m_size_L; i++)
   {
     indexLinear = (passwordInt + i) % m_size_L;
-    if(!m_arrLinear[indexLinear].isDeleted() && m_arrLinear[indexLinear].getName() == userName)
+    if(!m_arrLinear[indexLinear].isDeleted())
     {
-      m_arrLinear[indexLinear] = deletion;
-      m_arrLinear[indexLinear].setDeletion(true);
-      deleted_L = true;
-      break;
+      if(m_arrLinear[indexLinear].getName() == userName)
+      {
+        m_arrLinear[indexLinear] = deletion;
+        m_arrLinear[indexLinear].setDeletion(true);
+        deleted_L = true;
+      }
     }
   }
   std::cout << "Liner probing: \n";
@@ -283,12 +285,14 @@ void HashTable::removeUser(std::string userName, std::string password)
   for(int i = 0; i < m_size_Q; i++)
   {
     indexQuadratic = (passwordInt + i) % m_size_Q;
-    if(!m_arrQuadratic[indexQuadratic].isDeleted() && m_arrQuadratic[indexQuadratic].getName() == userName)
+    if(!m_arrQuadratic[indexQuadratic].isDeleted())
     {
-      m_arrQuadratic[indexQuadratic] = deletion;
-      m_arrQuadratic[indexQuadratic].setDeletion(true);
-      deleted_Q = true;
-      break;
+      if(m_arrQuadratic[indexQuadratic].getName() == userName)
+      {
+        m_arrQuadratic[indexQuadratic] = deletion;
+        m_arrQuadratic[indexQuadratic].setDeletion(true);
+        deleted_Q = true;
+      }
     }
   }
   std::cout << "Quadratic probing: \n";

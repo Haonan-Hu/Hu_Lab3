@@ -14,7 +14,7 @@ class User
 private:
 	std::string m_userName;
 	std::string m_password;
-	bool m_deleted;
+	bool m_deleted = false;
 
 public:
 	/**
@@ -23,6 +23,7 @@ public:
 	* @param entry,the value of item
 	*/
 	User() {};
+	~User(){};
 	/**
 	* @pre none
 	* @post construct an item with given value
@@ -53,8 +54,8 @@ public:
 	* @return the next item
 	*/
 	std::string getName()const;
-	bool isEmpty();
-	bool isDeleted();
+	bool isEmpty()const;
+	bool isDeleted()const;
 	void setDeletion(bool deleted);
 	void operator=(User user);
 };

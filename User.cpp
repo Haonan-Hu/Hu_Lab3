@@ -33,7 +33,7 @@ std::string User::getName()const
 	return m_userName;
 }
 
-bool User::isEmpty()
+bool User::isEmpty()const
 {
 	if(m_userName.length() == 0 || m_password.length() == 0)
 	{
@@ -50,7 +50,7 @@ void User::setDeletion(bool deleted)
 	m_deleted = deleted;
 }
 
-bool User::isDeleted()
+bool User::isDeleted()const
 {
 	return m_deleted;
 }
