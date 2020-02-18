@@ -19,6 +19,8 @@ HashTable::~HashTable()
 {
   delete[] m_arrLinear;
   delete[] m_arrQuadratic;
+  m_arrLinear= NULL;
+  m_arrQuadratic = NULL;
 }
 
 double HashTable::getLambdaLinear()
@@ -180,6 +182,8 @@ void HashTable::rehash()
         temp_L[rehashIndex_L].setPassword(m_arrLinear[i].getPassword());
       }
     }
+    delete[] m_arrLinear;
+    m_arrLinear = temp_L;
     for(int i = 0; i < prevSize_Q; i++)
     {
       if(!m_arrQuadratic[i].isEmpty())
@@ -190,12 +194,8 @@ void HashTable::rehash()
         temp_Q[rehashIndex_Q].setPassword(m_arrQuadratic[i].getPassword());
       }
     }
+    delete[] m_arrQuadratic;
     m_arrQuadratic = temp_Q;
-    m_arrLinear = temp_L;
-  }
-  else
-  {
-    std::cout << "Dont need to rehash yet\n";
   }
 }
 

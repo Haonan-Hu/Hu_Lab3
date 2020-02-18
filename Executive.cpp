@@ -54,7 +54,9 @@ executive::executive(std::string fileName)
     std::cout << "Unable to open file\n";
 }
 
-executive::~executive(){}
+executive::~executive(){
+
+}
 
 void executive::run()
 {
